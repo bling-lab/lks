@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  margin: 10px;
+  padding: 20px;
+}
+.heder {
+  text-align: center;
+}
+.container-create {
+  width: 350px;
+  height: 500px;
+  background: rgb(171, 235, 240);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.input-text {
+  margin: 10px;
+  padding: 10px;
+}
+
+button {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+}
