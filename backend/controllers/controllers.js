@@ -1,6 +1,8 @@
 import katalog from "../models/models.js";
 import sendImage from "../libs/s3client.js";
 import { v4 as random } from "uuid";
+import { storage } from "../libs/env.js";
+
 const route = {
   getAllkatalog: async (req, res) => {
     try {
@@ -23,13 +25,13 @@ const route = {
       console.log(req.file);
       const filename = random() + req.file.originalname;
       console.log(filename);
-      const result = await sendImage("lks-storage", filename, file);
+      const result = await sendImage(filename, file);
       console.log(result.RequestCharged);
 
       const data = {
         title,
         description,
-        imageUrl: `https://lks-storage.s3.us-east-1.amazonaws.com/${filename}`,
+        imageUrl: storage.baseUrl + filename,
       };
 
       await katalog.create(data);

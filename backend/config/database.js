@@ -1,14 +1,13 @@
 import { Sequelize } from "sequelize";
-import "dotenv/config";
+import { database as db } from "../libs/env.js";
 
-const { databases, host, user, pass } = process.env;
 
 const database = new Sequelize({
-  database: databases,
-  host: host,
-  port: 3306,
-  username: user,
-  password: "bling12345#",
+  database: db.name,
+  host: db.host,
+  port: db.port,
+  username: db.user,
+  password: db.pass,
   dialect: "mysql",
 });
 

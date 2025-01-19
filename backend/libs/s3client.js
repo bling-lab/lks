@@ -1,16 +1,16 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-
+import { storage } from "./env.js";
 const s3 = new S3Client({
   credentials: {
-    accessKeyId: "AKIAR72PHCQPR3OTAADP",
-    secretAccessKey: "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",
+    accessKeyId: storage.accessKeyId,
+    secretAccessKey: storage.secretAccessKey,
   },
-  region: "us-east-1",
+  region: storage.region,
 });
 
-const sendImage = async (bucket, name, image) => {
+const sendImage = async (name, image) => {
   const command = new PutObjectCommand({
-    Bucket: bucket,
+    Bucket: storage.Bucket,
     Key: name,
     Body: image.buffer,
     ContentType: image.mimetype,
