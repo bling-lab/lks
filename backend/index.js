@@ -1,10 +1,5 @@
 import express from "express";
 import cors from "cors";
-import "dotenv/config";
-import { database as db, storage } from "./libs/env.js";
-
-console.log(db, storage)
-
 import database from "./config/database.js";
 import katalog from "./models/models.js";
 import route from "./controllers/controllers.js";
@@ -20,7 +15,7 @@ app.post("/api", image.single("file"), route.addKatalog);
 
 try {
   database.authenticate();
-  katalog.sync({ force: true });
+  katalog.sync();
   console.log("connnected database...");
 } catch (error) {
   console.log(error);

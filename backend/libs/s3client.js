@@ -10,7 +10,7 @@ const s3 = new S3Client({
 
 const sendImage = async (name, image) => {
   const command = new PutObjectCommand({
-    Bucket: storage.Bucket,
+    Bucket: storage.bucket,
     Key: name,
     Body: image.buffer,
     ContentType: image.mimetype,

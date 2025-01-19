@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize";
 import { database as db } from "../libs/env.js";
 
-
 const database = new Sequelize({
   database: db.name,
   host: db.host,

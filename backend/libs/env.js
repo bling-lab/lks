@@ -13,7 +13,7 @@ const storage = {
     accessKeyId: process.env.STORAGE_accessKeyId,
     secretAccessKey: process.env.STORAGE_secretAccessKey,
     region: process.env.STORAGE_region,
-    Bucket: process.env.STORAGE_bucketName,
+    bucket: process.env.STORAGE_bucketName,
     baseUrl: process.env.STORAGE_baseUrl
 }
 
