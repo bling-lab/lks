@@ -19,7 +19,7 @@ function Create() {
 
     console.log(title, description)
     await axios
-      .post(baseUrl, form)
+      .post(b`${baseUrl}/api`, form)
       .then((m) => (m.status === 201 ? navigate("/") : console.log("error")));
   };
 

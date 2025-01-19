@@ -35,7 +35,7 @@ const route = {
       const data = {
         title,
         description,
-        imageUrl: `${storage.baseUrl}${filename}`,
+        imageUrl: `${storage.baseUrl}/${filename}`,
       };
 
       await katalog.create(data);

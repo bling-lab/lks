@@ -11,7 +11,7 @@ function Homepage() {
   }, []);
 
   const getdata = async () => {
-    const res = (await axios.get(baseUrl)).data;
+    const res = (await axios.get(`${baseUrl}/api`)).data;
     setIp(res.serverIP)
     setData(res.data);
   };
