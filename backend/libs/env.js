@@ -17,5 +17,7 @@ const storage = {
     baseUrl: process.env.STORAGE_baseUrl
 }
 
-export { database, storage };
+const { iface } = process.env.NETWORK_iface
+
+export { database, storage, iface };
 

@@ -1,43 +1,70 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
+import "../index.css"
+
 function Create() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState();
+  const navigate = useNavigate();
 
+  const save = async (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("title", title);
+    form.append("description", description);
+    form.append("file", file);
 
-    const [title, setTitle] = useState('')
-    const [desc, setDesc] = useState('')
-    const [file, setFile] = useState('')
+    console.log(title, description)
+    await axios
+      .post(baseUrl, form)
+      .then((m) => (m.status === 201 ? navigate("/") : console.log("error")));
+  };
 
-    const upload = async (e) => {
-        e.preventDefault()
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("desc", desc)
-        formData.append("title", title);
-        try {
-            await axios.post('http://localhost:5000/api', formData)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    return (
+  return (
+    <>
+      <div className="container mx-auto max-w-2xl p-10 flex justify-center font-Inter">
+        <form className=" h-[300px] w-4/5 bg-[#e6edf7] shadow-lg p-5 rounded-md" onSubmit={save} encType="multipart/form-data">
+          <label htmlFor="title" >
+            Title
+          </label>
+          <br />
+          <input className="rounded-md w-11/12 h-10 px-2 mb-2" type="text" name="title" id="title"
+            onChange={(e) => setTitle(e.target.value)} />
 
-        <div className="container">
-            <form onSubmit={(e) => upload(e)} encType='multipart/form-data'>
-                <label htmlFor="judul">
-                    Judul Berita <input onChange={(e) => setTitle(e.target.value)} type="text" name="judul" id="judul" />
-                </label><br />
-                <label htmlFor="deskripsi">
-                    Deskripsi Berita <input onChange={(e) => setDesc(e.target.value)} type="text" name="deskripsi" id="deskripsi" />
-                </label><br />
-                <label htmlFor="file">
-                    Files :  <input onChange={(e) => setFile(e.target.files[0])} type="file" name="gambar" id="file" />
-                </label><br />
+          <label htmlFor="description">
+            Deskripsi
+          </label>
+          <br />
+          <input
+            className="rounded-md w-11/12 h-10 p-2 mb-2"
+            type="text"
+            name="description"
+            id="description"
+            onChange={(e) => setDescription(e.target.value)}
 
-                <button type="submit">Upload</button>
-            </form>
-        </div>
-    )
+          />
+          <br />
+          <label htmlFor="file">
+            File
+          </label>
+          <br className="mb-1" />
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            className=" w-full h-10 mb-2"
+            type="file"
+            name="file"
+            id="file"
+
+          /> <br />
+
+          <button className="p-3 bg-blue text-slate font-semibold rounded-lg" type="submit">Submit</button>
+        </form>
+      </div>
+    </>
+  );
 }
 
-
-export default Create
+export default Create;
